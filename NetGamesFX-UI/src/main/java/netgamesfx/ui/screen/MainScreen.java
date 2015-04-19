@@ -16,8 +16,26 @@ import javafx.scene.control.Button;
  */
 @FXMLController("MainScreen.fxml")
 public class MainScreen {
-    
-    
-    @FXML @ActionTrigger("quit")
+
+    @FXML
+    @ActionTrigger("startLocalGame")
+    private Button startLocalGameBtn;
+    @FXML
+    @ActionTrigger("joinNetworkGame")
+    private Button joinNetworkGameBtn;
+    @FXML
+    @ActionTrigger("hostNetworkGame")
+    private Button hostNetworkGameBtn;
+    @FXML
+    @ActionTrigger("loadSavedGame")
+    private Button loadSavedGameBtn;
+    @FXML
+    @ActionTrigger("settings")
+    private Button settingsBtn;
+    @FXML
+    @ActionTrigger("openMapEditor")
+    private Button mapEditorBtn;
+    @FXML
+    @ActionTrigger("quit")
     private Button quitBtn;
 }
