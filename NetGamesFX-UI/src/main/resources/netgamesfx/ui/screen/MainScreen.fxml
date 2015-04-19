@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?scenebuilder-stylesheet ../NetGamesFX.css?>
+
+<AnchorPane id="AnchorPane" minHeight="400.0" minWidth="600.0" prefHeight="-1.0" prefWidth="-1.0" stylesheets="@../NetGamesFX.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" >
+  <children>
+    <VBox alignment="TOP_CENTER" prefHeight="-1.0" prefWidth="250.0" styleClass="main-button-panel" visible="true" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+      <children>
+        <Button fx:id="startNewGameBtn" minWidth="200.0" mnemonicParsing="false" prefWidth="-1.0" styleClass="main-button" text="Start New Game" />
+        <Button minWidth="200.0" mnemonicParsing="false" prefWidth="-1.0" styleClass="main-button" text="Join Network Game" />
+        <Button minWidth="200.0" mnemonicParsing="false" styleClass="main-button" text="Load Saved Game" />
+        <Button minWidth="200.0" mnemonicParsing="false" styleClass="main-button" text="Settings" />
+        <Button minWidth="200.0" mnemonicParsing="false" styleClass="main-button" text="Map Editor" />
+        <Button fx:id="quitBtn" minWidth="200.0" mnemonicParsing="false" styleClass="main-button" text="Exit" />
+      </children>
+    </VBox>
+      <Label fx:id="titleLbl" layoutX="14.0" layoutY="14.0" text="NetGamesFX 3.0" />
+  </children>
+</AnchorPane>
