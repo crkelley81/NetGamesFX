@@ -3,6 +3,8 @@ package netgamesfx.ui;
 import netgamesfx.ui.screen.ChooseGameScreen;
 import netgamesfx.ui.screen.MainScreen;
 import io.datafx.controller.flow.Flow;
+import java.util.HashSet;
+import java.util.Set;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -17,6 +19,9 @@ public class NetGamesFX extends Application {
 
     @Override
     public void start(final Stage stage) throws Exception {
+        Thread.setDefaultUncaughtExceptionHandler(this::uncaughtException);
+        Thread.currentThread().setUncaughtExceptionHandler(this::uncaughtException);
+        
         Flow flow = createFlow();
         flow.startInStage(stage);
         
@@ -31,5 +36,9 @@ public class NetGamesFX extends Application {
                 .withLink(MainScreen.class, "startLocalGame", ChooseGameScreen.class)
                 .withGlobalLink("mainMenu", MainScreen.class)
                 .withGlobalTaskAction("quit", () -> Platform.exit());
+    }
+    
+    private void uncaughtException(final Thread thread, final Throwable throwable) {
+        throwable.printStackTrace();
     }
 }

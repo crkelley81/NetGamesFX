@@ -13,7 +13,7 @@
   <children>
     <VBox alignment="TOP_CENTER" prefHeight="-1.0" prefWidth="250.0" styleClass="main-button-panel" visible="true" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
       <children>
-        <Button fx:id="startNewGameBtn" minWidth="200.0" mnemonicParsing="false" prefWidth="-1.0" styleClass="main-button" text="Start New Game" />
+        <Button fx:id="startLocalGameBtn" minWidth="200.0" mnemonicParsing="false" prefWidth="-1.0" styleClass="main-button" text="Start New Game" />
         <Button minWidth="200.0" mnemonicParsing="false" prefWidth="-1.0" styleClass="main-button" text="Join Network Game" />
         <Button minWidth="200.0" mnemonicParsing="false" styleClass="main-button" text="Load Saved Game" />
         <Button minWidth="200.0" mnemonicParsing="false" styleClass="main-button" text="Settings" />
