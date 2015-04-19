@@ -5,3 +5,5 @@
 *.war
 *.ear
 /.nb-gradle/private/
+/NetGamesFX-UI/build/
+/NetGamesFX-Core/build/
