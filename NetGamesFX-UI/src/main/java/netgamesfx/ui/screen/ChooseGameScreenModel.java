@@ -5,6 +5,8 @@
  */
 package netgamesfx.ui.screen;
 
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableBooleanValue;
@@ -38,5 +40,10 @@ public class ChooseGameScreenModel {
     
     public final ObservableBooleanValue disablePlayButtonProperty() {
         return selectedGameProperty.isNull();
+    }
+
+    public final void setInstalledGames(List<GameDefinition> list) {
+        this.installedGames.removeAll();
+        this.installedGames.addAll(list);
     }
 }

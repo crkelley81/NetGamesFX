@@ -10,6 +10,7 @@ import io.datafx.controller.context.ConcurrencyProvider;
 import io.datafx.controller.flow.action.ActionTrigger;
 import io.datafx.core.concurrent.ObservableExecutor;
 import java.time.Duration;
+import java.util.concurrent.CompletableFuture;
 import java.util.logging.Logger;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -20,6 +21,7 @@ import javafx.scene.web.WebView;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import netgamesfx.engine.game.GameDefinition;
+import netgamesfx.engine.game.GameManager;
 import org.reactfx.EventStream;
 import org.reactfx.util.Try;
 
@@ -31,20 +33,27 @@ import org.reactfx.util.Try;
 public class ChooseGameScreen {
     private static final Logger LOG = Logger.getLogger(ChooseGameScreen.class.getName());
     
+    @Inject private GameManager manager;
     @Inject private ChooseGameScreenModel model;
     @ConcurrencyProvider private ObservableExecutor executor;
     
     @FXML private void refreshGamesList() {
         LOG.info("Refresh the games list");
+        
+        CompletableFuture.supplyAsync(() -> manager.findInstalledGames())//, executor)
+                .thenAccept(list -> model.setInstalledGames(list));
     }
     
     @PostConstruct
-    private void doInit() {
+    public void doInit() {
+        assert model != null : "Model should have been injected by flow";
+        assert gamesList != null : "gamesList should have been injected; check FXML";
+        assert executor != null : "Executor should have been injected by flow";
         
         gamesList.setItems(model.getInstalledGames());
         model.selectedGameProperty().bind(gamesList.getSelectionModel().selectedItemProperty());
         
-        titleLbl.textProperty().bind(model.titleProperty());
+        gameTitleLbl.textProperty().bind(model.titleProperty());
         playBtn.disableProperty().bind(model.disablePlayButtonProperty());
         
         EventStream<GameDefinition> stream = model.selectedGameProperty().values();
@@ -54,6 +63,8 @@ public class ChooseGameScreen {
                 .mapToTask(this::loadGameHtml)
                 .awaitLatest(cancelImpulse)
                 .subscribe(this::updateGameHtml);
+        
+        refreshGamesList();
     }
     
     private Task<String> loadGameHtml(final GameDefinition gd) {
@@ -72,7 +83,7 @@ public class ChooseGameScreen {
     
     @FXML private ListView<GameDefinition> gamesList;
     @FXML private WebView gameView;
-    @FXML private Label titleLbl;
+    @FXML private Label gameTitleLbl;
     @FXML @ActionTrigger("mainMenu") private Button mainMenuBtn;
     @FXML @ActionTrigger("d") private Button playBtn;
 }
