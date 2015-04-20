@@ -5,6 +5,7 @@
  */
 package netgamesfx.ui.screen;
 
+import com.guigarage.controls.SimpleMediaListCell;
 import io.datafx.controller.FXMLController;
 import io.datafx.controller.context.ConcurrencyProvider;
 import io.datafx.controller.flow.action.ActionTrigger;
@@ -22,6 +23,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import netgamesfx.engine.game.GameDefinition;
 import netgamesfx.engine.game.GameManager;
+import netgamesfx.ui.screen.ChooseGameScreenModel.GameDefinitionAdapter;
 import org.reactfx.EventStream;
 import org.reactfx.util.Try;
 
@@ -50,8 +52,9 @@ public class ChooseGameScreen {
         assert gamesList != null : "gamesList should have been injected; check FXML";
         assert executor != null : "Executor should have been injected by flow";
         
+        gamesList.setCellFactory(v -> new SimpleMediaListCell());
         gamesList.setItems(model.getInstalledGames());
-        model.selectedGameProperty().bind(gamesList.getSelectionModel().selectedItemProperty());
+        model.selectedGameAdapterProperty().bind(gamesList.getSelectionModel().selectedItemProperty());
         
         gameTitleLbl.textProperty().bind(model.titleProperty());
         playBtn.disableProperty().bind(model.disablePlayButtonProperty());
@@ -81,7 +84,7 @@ public class ChooseGameScreen {
         gameView.getEngine().loadContent(html.getOrElse("<html></html>"));
     }
     
-    @FXML private ListView<GameDefinition> gamesList;
+    @FXML private ListView<GameDefinitionAdapter> gamesList;
     @FXML private WebView gameView;
     @FXML private Label gameTitleLbl;
     @FXML @ActionTrigger("mainMenu") private Button mainMenuBtn;

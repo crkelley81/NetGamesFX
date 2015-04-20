@@ -19,4 +19,5 @@ dependencies {
     compile 'de.jensd:fontawesomefx:8.3'
     compile 'io.datafx:flow:8.0'
     compile 'io.datafx:injection:8.0'
+    compile 'com.guigarage:controls:0.7'
 }
