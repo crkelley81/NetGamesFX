@@ -9,13 +9,9 @@ package netgamesfx.engine.game;
  *
  * @author Christopher
  */
-public class GameDefinition {
+public abstract class GameDefinition {
     
-    public String getTitle() {
-        return "";
-    }
+    public abstract String getTitle();
 
-    public String getDescriptionAsHtml() {
-        return "<html></html>";
-    }
+    public abstract String getDescriptionAsHtml();
 }
